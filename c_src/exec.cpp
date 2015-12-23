@@ -865,10 +865,10 @@ void initialize(int userid, bool use_alt_fds)
     // to be able to adjust niceness and run commands as other users.
     if (getuid() == 0) {
         superuser = true;
-        if (userid == 0) {
-            fprintf(stderr, "When running as root, \"-user User\" option must be provided!\r\n");
-            exit(4);
-        }
+        // if (userid == 0) {
+        //    fprintf(stderr, "When running as root, \"-user User\" option must be provided!\r\n");
+        //    exit(4);
+        // }
 
         #ifdef HAVE_CAP
         if (prctl(PR_SET_KEEPCAPS, 1) < 0) {
@@ -894,11 +894,11 @@ void initialize(int userid, bool use_alt_fds)
         if (debug && (pw = getpwuid(geteuid())) != NULL)
             fprintf(stderr, "exec: running as: %s (euid=%d)\r\n", pw->pw_name, geteuid());
 
-        if (geteuid() == 0) {
-            fprintf(stderr, "exec: failed to set effective userid to a non-root user %s (uid=%d)\r\n",
-                pw ? pw->pw_name : "", geteuid());
-            exit(7);
-        }
+        // if (geteuid() == 0) {
+        //     fprintf(stderr, "exec: failed to set effective userid to a non-root user %s (uid=%d)\r\n",
+        //         pw ? pw->pw_name : "", geteuid());
+        //     exit(7);
+        // }
 
         #ifdef HAVE_CAP
         cap_t cur;
